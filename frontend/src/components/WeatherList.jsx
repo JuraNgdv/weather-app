@@ -9,21 +9,21 @@ const WeatherList = ({ weather }) => {
         next: null
     });
 
-
     // Handle the previous button click
     const handlePrevious = () => {
-        if (weather.previous) {
-            fetchWeatherData(weather.previous);
+        if (currentWeatherData.previous) {
+            fetchWeatherData(currentWeatherData.previous);
         }
     };
 
     // Handle the next button click
     const handleNext = () => {
-        if (weather.next) {
-            fetchWeatherData(weather.next);
+        if (currentWeatherData.next) {
+            fetchWeatherData(currentWeatherData.next);
         }
     };
 
+    // Fetch weather data from the given URL (previous or next)
     const fetchWeatherData = async (url) => {
         try {
             const response = await fetch(url);
@@ -31,17 +31,22 @@ const WeatherList = ({ weather }) => {
             setCurrentWeatherData({
                 results: data.results,
                 previous: data.previous,
-                next: data.next});
-            setCurrentPage(currentPage + 1);
+                next: data.next
+            });
+            setCurrentPage(currentPage + 1); // Update page number
         } catch (err) {
             console.error("Failed to fetch weather data", err);
         }
     };
 
-    // Initialize the data
+    // Initialize the data when the component mounts or weather prop changes
     useEffect(() => {
         if (weather && weather.results) {
-            setCurrentWeatherData(weather.results);
+            setCurrentWeatherData({
+                results: weather.results,
+                previous: weather.previous,
+                next: weather.next
+            });
         }
     }, [weather]);
 
@@ -54,17 +59,17 @@ const WeatherList = ({ weather }) => {
                     <p>No weather data available</p>
                 ) : (
                     currentWeatherData.results.map((weatherData, index) => (
-                        <WeatherCard key={index} weatherData={weatherData}/>
+                        <WeatherCard key={index} weatherData={weatherData} />
                     ))
                 )}
             </div>
 
             <div className="pagination-controls">
-                <button onClick={handlePrevious} disabled={!weather.previous}>
+                <button onClick={handlePrevious} disabled={!currentWeatherData.previous}>
                     Previous
                 </button>
                 <span>Page {currentPage}</span>
-                <button onClick={handleNext} disabled={!weather.next}>
+                <button onClick={handleNext} disabled={!currentWeatherData.next}>
                     Next
                 </button>
             </div>
