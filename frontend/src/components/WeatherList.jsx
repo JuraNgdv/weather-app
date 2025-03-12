@@ -9,7 +9,7 @@ const WeatherList = (weather) => {
             {weather.length === 0 ? (
                 <p>No weather data available</p>
             ) : (
-                <WeatherCard weatherData={weather.results} />
+                weather.map((card) => {<WeatherCard weatherData={card.results} />})
             )}
         </div>
     );
