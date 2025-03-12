@@ -23,7 +23,7 @@ def update_weather_for_city(city_id):
     if response.status_code == 200:
         data = response.json()
         weather = Weather.objects.create(
-            city=city_id,
+            city=city,
             temperature=data['main']['temp'],
             feels_like=data['main']['feels_like'],
             temp_min=data['main']['temp_min'],
@@ -35,5 +35,7 @@ def update_weather_for_city(city_id):
             timestamp=timezone.now()
         )
         logging.info(weather)
+        weathers = Weather.objects.get(city=city)
+        logging.warning(weathers)
     else:
         logging.info(f"Error fetching weather data for {city.name}")
