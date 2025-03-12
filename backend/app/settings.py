@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-lw28q(j7hb#28+8g@!$-8x9=tw@1(*riuigo%yowox@os%=6ud'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG", True)
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -107,6 +107,31 @@ TEMPLATES = [
         },
     },
 ]
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'ERROR',
+            'class': 'logging.StreamHandler',
+        },
+        'file': {
+            'level': 'ERROR',
+            'class': 'logging.FileHandler',
+            'filename': 'django_errors.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', 'file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
+
+
 
 WSGI_APPLICATION = 'app.wsgi.application'
 
