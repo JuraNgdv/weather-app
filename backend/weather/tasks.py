@@ -9,7 +9,7 @@ from django.conf import settings
 @shared_task
 def update_weather_for_city(city_id):
     city = City.objects.get(id=city_id)
-
+    logging.info(f'{city=}')
     params = {
         'lat': city.lat,
         'lon': city.lon,
@@ -18,6 +18,8 @@ def update_weather_for_city(city_id):
     }
 
     response = requests.get(settings.OPENWEATHER_WEATHER_URL, params=params)
+    logging.info(f'{response=}')
+
     if response.status_code == 200:
         data = response.json()
         weather = Weather.objects.create(
