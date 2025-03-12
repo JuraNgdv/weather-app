@@ -6,7 +6,29 @@ import requests
 from django.utils import timezone
 from django.conf import settings
 
-@shared_task
+from celery import Celery
+from celery.schedules import crontab
+
+# Ініціалізація Celery
+app = Celery('app')
+
+
+def add_weather_task(city_id):
+    from celery import current_app
+    current_app.add_periodic_task(
+        600.0,
+        update_weather_for_city.s(city_id),
+        name=f'update_weather_for_city_{city_id}',
+    )
+
+
+def remove_weather_task(city_id):
+    from celery import current_app
+    current_app.control.revoke(f'update_weather_for_city_{city_id}', terminate=True)
+
+
+
+@app.task
 def update_weather_for_city(city_id):
     city = City.objects.get(id=city_id)
     logging.info(f'{city=}')
@@ -35,7 +57,8 @@ def update_weather_for_city(city_id):
             timestamp=timezone.now()
         )
         logging.info(weather)
-        weathers = Weather.objects.get(city=city)
-        logging.warning(weathers)
+        weathers = Weather.objects.filter(city=city).order_by('-timestamp')[:1]
+
+        logging.warning(f"{weathers=}")
     else:
         logging.info(f"Error fetching weather data for {city.name}")

@@ -6,7 +6,7 @@ from celery import current_app
 
 from weather.models import Weather
 from weather.serializers import WeatherSerializer
-from weather.tasks import update_weather_for_city
+from weather.tasks import update_weather_for_city, add_weather_task, remove_weather_task
 
 from .models import City
 from .serializers import CitySerializer
@@ -67,6 +67,7 @@ def add_city(request):
         lon=lon
     )
     if created:
+        add_weather_task(city.id)
         update_weather_for_city.apply_async((city.id,), countdown=0)
 
     serializer = CitySerializer(city)
@@ -78,7 +79,7 @@ def delete_city(request, city_id):
     try:
         city = City.objects.get(id=city_id)
         city.delete()
-        current_app.control.revoke(city_id, terminate=True)
+        remove_weather_task(city_id)
         return Response({'message': 'City deleted and task stopped'}, status=204)
     except City.DoesNotExist:
         return Response({'error': 'City not found'}, status=404)
