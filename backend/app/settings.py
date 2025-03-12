@@ -29,8 +29,6 @@ SECRET_KEY = 'django-insecure-lw28q(j7hb#28+8g@!$-8x9=tw@1(*riuigo%yowox@os%=6ud
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
 
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
 OPENWEATHER_GEOCODING_URL = 'https://api.openweathermap.org/geo/1.0/direct'
@@ -90,6 +88,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:5173",
 ]
+
+ALLOWED_HOSTS = [*]
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
