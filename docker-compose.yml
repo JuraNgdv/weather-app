@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./backend
+    container_name: django_app
+    command: >
+      sh -c "python manage.py migrate && 
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/app/.env
+
+  frontend:
+    build: ./frontend
+    container_name: react_vite_app
+    ports:
+      - "5173:5173"
+    command: ["npm", "run", "dev"]
+    depends_on:
+      - backend
+
+  celery:
+    build: ./backend
+    container_name: celery_worker
+    command: celery -A app worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - backend
+      - redis
+    env_file:
+      - ./backend/app/.env
+
