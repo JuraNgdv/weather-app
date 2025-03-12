@@ -89,7 +89,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
 ]
 
-ALLOWED_HOSTS = [*]
+ALLOWED_HOSTS = ["*"]
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
