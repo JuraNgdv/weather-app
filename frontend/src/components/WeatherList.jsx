@@ -2,6 +2,7 @@ import React from 'react';
 import WeatherCard from './WeatherCard';
 
 const WeatherList = ({ weather }) => {
+    console.log(weather);
     console.log(weather.results);
     return (
         <div>
