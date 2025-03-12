@@ -1,34 +1,12 @@
 import logging
-
 from celery import shared_task
 from .models import City, Weather
 import requests
 from django.utils import timezone
 from django.conf import settings
 
-from celery import Celery
-from celery.schedules import crontab
 
-# Ініціалізація Celery
-app = Celery('app')
-
-
-def add_weather_task(city_id):
-    from celery import current_app
-    current_app.add_periodic_task(
-        600.0,
-        update_weather_for_city.s(city_id),
-        name=f'update_weather_for_city_{city_id}',
-    )
-
-
-def remove_weather_task(city_id):
-    from celery import current_app
-    current_app.control.revoke(f'update_weather_for_city_{city_id}', terminate=True)
-
-
-
-@app.task
+@shared_task
 def update_weather_for_city(city_id):
     city = City.objects.get(id=city_id)
     logging.info(f'{city=}')
@@ -62,3 +40,19 @@ def update_weather_for_city(city_id):
         logging.warning(f"{weathers=}")
     else:
         logging.info(f"Error fetching weather data for {city.name}")
+
+
+def add_weather_task(city_id):
+    """Додає періодичне завдання для оновлення погоди кожні 10 хвилин"""
+    from celery import current_app
+    current_app.add_periodic_task(
+        600.0,  # 600 секунд = 10 хвилин
+        update_weather_for_city.s(city_id),  # Викликає задачу для конкретного міста
+        name=f'update_weather_for_city_{city_id}',
+    )
+
+
+def remove_weather_task(city_id):
+    """Видаляє періодичне завдання для міста"""
+    from celery import current_app
+    current_app.control.revoke(f'update_weather_for_city_{city_id}', terminate=True)

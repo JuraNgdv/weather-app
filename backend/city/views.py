@@ -68,6 +68,7 @@ def add_city(request):
     )
     if created:
         add_weather_task(city.id)
+
         update_weather_for_city.apply_async((city.id,), countdown=0)
 
     serializer = CitySerializer(city)
