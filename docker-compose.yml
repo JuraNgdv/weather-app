@@ -27,9 +27,6 @@ services:
     command: celery -A app worker --loglevel=info
     volumes:
       - ./backend:/app
-    depends_on:
-      - backend
-      - redis
     env_file:
       - ./backend/app/.env
 
