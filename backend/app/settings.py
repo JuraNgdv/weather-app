@@ -15,8 +15,6 @@ from pathlib import Path
 
 load_dotenv(dotenv_path=Path(__file__).resolve().parent.parent / '.env')
 
-CONFIG = os.getenv("DJANGO_ENV", "dev")
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -71,6 +69,7 @@ INSTALLED_APPS = [
     'weather.apps.WeatherConfig',
     'city.apps.CityConfig',
 
+    'corsheaders',
     'rest_framework',
 ]
 
@@ -82,7 +81,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware'
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'app.urls'
 
