@@ -1,22 +1,17 @@
 import React from 'react';
+import WeatherCard from './WeatherCard';
 
-const WeatherCard = ({ weatherData }) => {
+const WeatherList = ({ weather }) => {
     return (
-        <div className="weather-card">
-            <h3>{weatherData.cityName}</h3>
-            <ul>
-                <li><strong>Temperature:</strong> {weatherData.temperature} °C</li>
-                <li><strong>Feels Like:</strong> {weatherData.feels_like} °C</li>
-                <li><strong>Min Temperature:</strong> {weatherData.temp_min} °C</li>
-                <li><strong>Max Temperature:</strong> {weatherData.temp_max} °C</li>
-                <li><strong>Pressure:</strong> {weatherData.pressure} hPa</li>
-                <li><strong>Humidity:</strong> {weatherData.humidity}%</li>
-                <li><strong>Wind Speed:</strong> {weatherData.wind_speed} m/s</li>
-                <li><strong>Cloudiness:</strong> {weatherData.cloudiness}%</li>
-                <li><strong>Timestamp:</strong> {new Date(weatherData.timestamp).toLocaleString()}</li>
-            </ul>
+        <div>
+            <h2>Weather Information</h2>
+            {weather.length === 0 ? (
+                <p>No weather data available</p>
+            ) : (
+                <WeatherCard weatherData={weather.weather} />
+            )}
         </div>
     );
 };
 
-export default WeatherCard;
+export default WeatherList;
