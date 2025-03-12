@@ -35,3 +35,34 @@ li {
 .error {
   color: red;
 }
+
+/* weather-card.css */
+.weather-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 10px;
+  width: 250px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  background-color: #fff;
+}
+
+.weather-card h3 {
+  font-size: 1.5em;
+  margin-bottom: 12px;
+}
+
+.weather-card ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.weather-card li {
+  margin: 8px 0;
+  font-size: 1em;
+}
+
+.weather-card strong {
+  font-weight: bold;
+}
