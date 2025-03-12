@@ -66,7 +66,6 @@ def add_city(request):
         lat=lat,
         lon=lon
     )
-    print(created)
     if created:
         update_weather_for_city.apply_async((city.id,), countdown=0)
 
