@@ -42,7 +42,6 @@ const App = () => {
         }
     };
 
-    // Handle adding a new city
     const handleCityAdded = (newCity) => {
         setCities([...cities, newCity]);
     };

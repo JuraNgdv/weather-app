@@ -43,7 +43,6 @@ def update_weather_for_city(city_id):
 
 
 def add_weather_task(city_id):
-    """Додає періодичне завдання для оновлення погоди кожні 10 хвилин"""
     from celery import current_app
     current_app.add_periodic_task(
         600.0,  # 600 секунд = 10 хвилин
@@ -53,6 +52,5 @@ def add_weather_task(city_id):
 
 
 def remove_weather_task(city_id):
-    """Видаляє періодичне завдання для міста"""
     from celery import current_app
     current_app.control.revoke(f'update_weather_for_city_{city_id}', terminate=True)

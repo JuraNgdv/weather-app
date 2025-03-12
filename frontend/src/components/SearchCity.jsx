@@ -6,7 +6,6 @@ const SearchCity = ({ onCityAdded }) => {
     const [searchResults, setSearchResults] = useState([]);
     const [error, setError] = useState('');
 
-    // Handle city search
     const handleSearch = async (e) => {
         const name = e.target.value;
         setCityName(name);
@@ -23,7 +22,6 @@ const SearchCity = ({ onCityAdded }) => {
         }
     };
 
-    // Handle city selection
     const handleCitySelect = async (city) => {
         try {
             const newCity =  await addCity(city);

@@ -9,7 +9,6 @@ const WeatherList = ({ weather }) => {
         next: null
     });
 
-    // Handle the previous button click
     const handlePrevious = () => {
         if (currentWeatherData.previous) {
             fetchWeatherData(currentWeatherData.previous);
@@ -23,7 +22,6 @@ const WeatherList = ({ weather }) => {
         }
     };
 
-    // Fetch weather data from the given URL (previous or next)
     const fetchWeatherData = async (url) => {
         try {
             const response = await fetch(url);
@@ -39,7 +37,6 @@ const WeatherList = ({ weather }) => {
         }
     };
 
-    // Initialize the data when the component mounts or weather prop changes
     useEffect(() => {
         if (weather && weather.results) {
             setCurrentWeatherData({
