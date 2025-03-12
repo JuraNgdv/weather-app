@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCities, fetchWeatherByCity, deleteCity } from './services/api';
 import CityList from './components/CityList';
-import SearchCity from './components/SearchCity';
+import AddCity from './components/AddCity';
 import WeatherList from './components/WeatherList';
 import './App.css';
 
@@ -24,8 +24,8 @@ const App = () => {
 
     const handleShowWeather = async (cityId) => {
         try {
-            const weather = await fetchWeatherByCity(cityId);
-            setWeather(weather);
+            const cityWeather = await fetchWeatherByCity(cityId);
+            setWeather(cityWeather);
         } catch (err) {
             setError('Failed to load weather');
         }
@@ -40,6 +40,7 @@ const App = () => {
         }
     };
 
+    // Handle adding a new city
     const handleCityAdded = (newCity) => {
         setCities([...cities, newCity]);
     };
@@ -50,14 +51,12 @@ const App = () => {
 
             {error && <p className="error">{error}</p>}
 
-            <SearchCity onCityAdded={handleCityAdded} />
-
+            <AddCity onCityAdded={handleCityAdded} />
             <CityList
                 cities={cities}
                 onDelete={handleDeleteCity}
                 onShowWeather={handleShowWeather}
             />
-
             <WeatherList weather={weather} />
         </div>
     );
