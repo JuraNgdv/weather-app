@@ -26,8 +26,8 @@ const App = () => {
     // Fetch weather for a specific city
     const handleShowWeather = async (cityId) => {
         try {
-            const cityWeather = await fetchWeatherByCity(cityId);
-            setWeather(cityWeather);
+            const weather = await fetchWeatherByCity(cityId);
+            setWeather(weather);
         } catch (err) {
             setError('Failed to load weather');
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const WeatherCard = (weatherData) => {
+const WeatherCard = ({weatherData}) => {
     return (
         <div className="weather-card">
             <h3>{weatherData.cityName}</h3>
