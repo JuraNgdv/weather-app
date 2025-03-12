@@ -35,7 +35,7 @@ def get_weather_with_cities(request):
 
     weather_with_cities = []
     for weather in weather_data:
-        weather_serialized = WeatherSerializer(weather).data
+        weather_serialized = WeatherSerializer(weather, many=True).data
         weather_serialized['cityName'] = weather.city.name  # Додаємо назву міста до даних погоди
         weather_with_cities.append(weather_serialized)
 
