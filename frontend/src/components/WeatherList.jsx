@@ -7,7 +7,7 @@ const WeatherList = ({ weather }) => {
     return (
         <div>
             <h2>Weather Information</h2>
-            {weather.results.length === 0 ? (
+            {weather.length === 0 ? (
                 <p>No weather data available</p>
             ) : (
 
