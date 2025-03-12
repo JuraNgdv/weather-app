@@ -5,6 +5,8 @@ import AddCity from './components/AddCity';
 import WeatherList from './components/WeatherList';
 import './App.css';
 
+import SearchCity from './components/SearchCity';
+
 const App = () => {
     const [cities, setCities] = useState([]);
     const [weather, setWeather] = useState([]);
@@ -51,7 +53,7 @@ const App = () => {
 
             {error && <p className="error">{error}</p>}
 
-            <AddCity onCityAdded={handleCityAdded} />
+            <SearchCity onCityAdded={handleCityAdded} />
             <CityList
                 cities={cities}
                 onDelete={handleDeleteCity}
