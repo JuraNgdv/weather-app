@@ -29,6 +29,7 @@ SECRET_KEY = 'django-insecure-lw28q(j7hb#28+8g@!$-8x9=tw@1(*riuigo%yowox@os%=6ud
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", True)
 
+ALLOWED_HOSTS = []
 
 
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
@@ -73,10 +74,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
-
     'django.middleware.security.SecurityMiddleware',
 
+    'corsheaders.middleware.CorsMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -86,7 +86,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://localhost:5173",
+]
 ROOT_URLCONF = 'app.urls'
 
 TEMPLATES = [
@@ -164,23 +167,3 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-CORS_ORIGIN_ALLOW_ALL = True
-CORS_ALLOW_HEADERS = (
-        'Access-Control-Allow-Headers',
-        'Access-Control-Allow-Credentials',
-    )
-ALLOWED_HOSTS = ['*']
-CORS_ALLOW_CREDENTIALS = False
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
- ]
-
-CORS_ALLOW_METHODS = (
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-)
