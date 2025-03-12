@@ -10,7 +10,6 @@ const App = () => {
     const [weather, setWeather] = useState([]);
     const [error, setError] = useState('');
 
-    // Fetch cities on initial load
     useEffect(() => {
         const loadCities = async () => {
             try {
@@ -23,7 +22,6 @@ const App = () => {
         loadCities();
     }, []);
 
-    // Fetch weather for a specific city
     const handleShowWeather = async (cityId) => {
         try {
             const cityWeather = await fetchWeatherByCity(cityId);
@@ -33,7 +31,6 @@ const App = () => {
         }
     };
 
-    // Handle city deletion
     const handleDeleteCity = async (cityId) => {
         try {
             await deleteCity(cityId);
