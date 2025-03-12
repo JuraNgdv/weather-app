@@ -1,7 +1,8 @@
 import React from 'react';
 import WeatherCard from './WeatherCard';
 
-const WeatherList = ({ weather }) => {
+const WeatherList = (weather) => {
+    console.log(weather);
     return (
         <div>
             <h2>Weather Information</h2>
