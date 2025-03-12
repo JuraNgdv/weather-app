@@ -1,19 +1,18 @@
 import React from 'react';
 
-const WeatherCard = ({weatherData}) => {
+const WeatherCard = ({card}) => {
     return (
         <div className="weather-card">
-            <h3>{weatherData.cityName}</h3>
             <ul>
-                <li><strong>Temperature:</strong> {weatherData.temperature} °C</li>
-                <li><strong>Feels Like:</strong> {weatherData.feels_like} °C</li>
-                <li><strong>Min Temperature:</strong> {weatherData.temp_min} °C</li>
-                <li><strong>Max Temperature:</strong> {weatherData.temp_max} °C</li>
-                <li><strong>Pressure:</strong> {weatherData.pressure} hPa</li>
-                <li><strong>Humidity:</strong> {weatherData.humidity}%</li>
-                <li><strong>Wind Speed:</strong> {weatherData.wind_speed} m/s</li>
-                <li><strong>Cloudiness:</strong> {weatherData.cloudiness}%</li>
-                <li><strong>Timestamp:</strong> {new Date(weatherData.timestamp).toLocaleString()}</li>
+                <li><strong>Temperature:</strong> {card.temperature} °C</li>
+                <li><strong>Feels Like:</strong> {card.feels_like} °C</li>
+                <li><strong>Min Temperature:</strong> {card.temp_min} °C</li>
+                <li><strong>Max Temperature:</strong> {card.temp_max} °C</li>
+                <li><strong>Pressure:</strong> {card.pressure} hPa</li>
+                <li><strong>Humidity:</strong> {card.humidity}%</li>
+                <li><strong>Wind Speed:</strong> {card.wind_speed} m/s</li>
+                <li><strong>Cloudiness:</strong> {card.cloudiness}%</li>
+                <li><strong>Timestamp:</strong> {new Date(card.timestamp).toLocaleString()}</li>
             </ul>
         </div>
     );
