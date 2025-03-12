@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { fetchCities, fetchWeatherByCity, deleteCity } from './services/api';
 import CityList from './components/CityList';
-import AddCity from './components/AddCity';
+import SearchCity from './components/SearchCity';
 import WeatherList from './components/WeatherList';
 import './App.css';
 
@@ -10,6 +10,7 @@ const App = () => {
     const [weather, setWeather] = useState([]);
     const [error, setError] = useState('');
 
+    // Fetch cities on initial load
     useEffect(() => {
         const loadCities = async () => {
             try {
@@ -22,6 +23,7 @@ const App = () => {
         loadCities();
     }, []);
 
+    // Fetch weather for a specific city
     const handleShowWeather = async (cityId) => {
         try {
             const cityWeather = await fetchWeatherByCity(cityId);
@@ -31,6 +33,7 @@ const App = () => {
         }
     };
 
+    // Handle city deletion
     const handleDeleteCity = async (cityId) => {
         try {
             await deleteCity(cityId);
@@ -51,12 +54,14 @@ const App = () => {
 
             {error && <p className="error">{error}</p>}
 
-            <AddCity onCityAdded={handleCityAdded} />
+            <SearchCity onCityAdded={handleCityAdded} />
+
             <CityList
                 cities={cities}
                 onDelete={handleDeleteCity}
                 onShowWeather={handleShowWeather}
             />
+
             <WeatherList weather={weather} />
         </div>
     );

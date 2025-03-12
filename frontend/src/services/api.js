@@ -22,3 +22,10 @@ export const fetchWeatherByCity = async (cityId) => {
     const response = await instance.get(`weather/${cityId}/`);
     return response.data;
 };
+
+export const searchCities = async (cityName) => {
+    const response = await axiosInstance.get('city/search/', {
+        params: { name: cityName },
+    });
+    return response.data;
+};
