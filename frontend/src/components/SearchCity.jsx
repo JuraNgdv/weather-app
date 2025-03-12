@@ -10,7 +10,7 @@ const SearchCity = ({ onCityAdded }) => {
     const handleSearch = async (e) => {
         const name = e.target.value;
         setCityName(name);
-
+        console.log(name);
         if (name.trim()) {
             try {
                 const cities = await searchCities(name);
