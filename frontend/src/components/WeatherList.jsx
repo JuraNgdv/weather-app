@@ -24,13 +24,15 @@ const WeatherList = ({ weather }) => {
         }
     };
 
-    // Function to fetch weather data from the given URL (previous or next)
     const fetchWeatherData = async (url) => {
         try {
             const response = await fetch(url);
             const data = await response.json();
-            setCurrentWeatherData(data.results); // Update the weather data
-            setCurrentPage(currentPage + 1); // Update page number
+            setCurrentWeatherData({
+                results: data.results,
+                previous: data.previous,
+                next: data.next});
+            setCurrentPage(currentPage + 1);
         } catch (err) {
             console.error("Failed to fetch weather data", err);
         }
