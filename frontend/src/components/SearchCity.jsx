@@ -26,8 +26,8 @@ const SearchCity = ({ onCityAdded }) => {
     // Handle city selection
     const handleCitySelect = async (city) => {
         try {
-            await addCity(city);
-            onCityAdded(city); // Update the parent with the newly added city
+            const newCity =  await addCity(city);
+            onCityAdded(newCity); 
             setCityName('');
             setSearchResults([]);
         } catch (err) {
