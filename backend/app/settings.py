@@ -29,7 +29,7 @@ SECRET_KEY = 'django-insecure-lw28q(j7hb#28+8g@!$-8x9=tw@1(*riuigo%yowox@os%=6ud
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 OPENWEATHER_API_KEY = os.getenv('OPENWEATHER_API_KEY')
