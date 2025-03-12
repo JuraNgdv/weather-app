@@ -3,7 +3,12 @@ import WeatherCard from './WeatherCard';
 
 const WeatherList = ({ weather }) => {
     const [currentPage, setCurrentPage] = useState(1);
-    const [currentWeatherData, setCurrentWeatherData] = useState([]);
+    const [currentWeatherData, setCurrentWeatherData] = useState({
+        results: [], // Initializing the `results` array
+        previous: null,
+        next: null
+    });
+
 
     // Handle the previous button click
     const handlePrevious = () => {
@@ -42,14 +47,16 @@ const WeatherList = ({ weather }) => {
         <div>
             <h2>Weather Information</h2>
 
-            {/* Weather cards */}
             <div className="weather-cards-container">
-                {currentWeatherData.results.map((weatherData, index) => (
-                    <WeatherCard key={index} weatherData={weatherData} />
-                ))}
+                {currentWeatherData.results.length === 0 ? (
+                    <p>No weather data available</p>
+                ) : (
+                    currentWeatherData.results.map((weatherData, index) => (
+                        <WeatherCard key={index} weatherData={weatherData}/>
+                    ))
+                )}
             </div>
 
-            {/* Pagination controls */}
             <div className="pagination-controls">
                 <button onClick={handlePrevious} disabled={!weather.previous}>
                     Previous
