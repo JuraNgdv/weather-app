@@ -108,3 +108,10 @@ Ensure you have Docker and Docker Compose installed on your system.
 
 ---
 
+
+
+### TODO
+- Redesign the UI
+- User authentication
+- City creation allowed only for admins
+- Implement tests
